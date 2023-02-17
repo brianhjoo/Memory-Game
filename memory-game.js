@@ -4,26 +4,28 @@
 
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const IMAGES = [
-  { src: "images/astronaut.jpg", name: "astronaut" },
-  { src: "images/bonsai_tree.jpg", name: "bonsai" },
-  { src: "images/cat.jpg", name: "cat" },
-  { src: "images/dog.jpg", name: "dog" },
-  { src: "images/donuts.jpg", name: "donuts" },
-  { src: "images/ice_cream.jpg", name: "ice-cream" },
-  { src: "images/oranges.jpg", name: "oranges" },
-  { src: "images/pineapple_with_shades.jpg", name: "pineapple" },
-  { src: "images/astronaut.jpg", name: "astronaut" },
-  { src: "images/bonsai_tree.jpg", name: "bonsai" },
-  { src: "images/cat.jpg", name: "cat" },
-  { src: "images/dog.jpg", name: "dog" },
-  { src: "images/donuts.jpg", name: "donuts" },
-  { src: "images/ice_cream.jpg", name: "ice-cream" },
-  { src: "images/oranges.jpg", name: "oranges" },
-  { src: "images/pineapple_with_shades.jpg", name: "pineapple" }
+  { src: "images/astronaut.jpg", id: "astronaut" },
+  { src: "images/flower.jpg", id: "flower" },
+  { src: "images/cat.jpg", id: "cat" },
+  { src: "images/dog.jpg", id: "dog" },
+  { src: "images/donuts.jpg", id: "donuts" },
+  { src: "images/ice_cream.jpg", id: "ice-cream" },
+  { src: "images/oranges.jpg", id: "oranges" },
+  { src: "images/pineapple_with_shades.jpg", id: "pineapple" },
+  { src: "images/astronaut.jpg", id: "astronaut" },
+  { src: "images/flower.jpg", id: "flower" },
+  { src: "images/cat.jpg", id: "cat" },
+  { src: "images/dog.jpg", id: "dog" },
+  { src: "images/donuts.jpg", id: "donuts" },
+  { src: "images/ice_cream.jpg", id: "ice-cream" },
+  { src: "images/oranges.jpg", id: "oranges" },
+  { src: "images/pineapple_with_shades.jpg", id: "pineapple" }
 ];
 const backOfCardImage = "images/card_design.jpg";
 
 const images = shuffle(IMAGES);
+
+const gameBoard = document.querySelector('#game');
 
 createCards(images);
 
@@ -66,6 +68,7 @@ function createCards(images) {
     backOfCard.classList.add('backOfCard');
 
     faceOfCard.setAttribute('src', image.src);
+    faceOfCard.setAttribute('id', image.id);
     backOfCard.setAttribute('src', backOfCardImage);
 
     card.append(faceOfCard, backOfCard);
@@ -90,17 +93,35 @@ function unFlipCard(card) {
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(e) {
-  const card = e.target;
-  if (!card.classList.contains('faceUp')) {
-    flipCard(card);
-  } else {
-    unFlipCard(card);
+  if (e.target.classList.contains('card')) {
+    const card = e.target;
+    if (!card.classList.contains('faceUp')) {
+      flipCard(card);
+    } else {
+      unFlipCard(card);
+    }
+    checkMatch(e);
   }
 }
 
-/** Event Listeners */
+/** Check to see if flipped cards match */
 
-const gameBoard = document.querySelector('#game');
+function checkMatch(e) {
+  const faceUpCards = gameBoard.querySelectorAll('.faceUp');
+  if (faceUpCards.length === 2) {
+    if (faceUpCards[0].firstChild.getAttribute('id') === faceUpCards[1].firstChild.getAttribute('id')) {
+      faceUpCards.forEach(card => {
+        card.classList.add('match');
+        card.classList.remove('faceUp');
+      });
+    } else {
+      faceUpCards.forEach(card => {
+        setTimeout(() => card.classList.remove('flipCard', 'faceUp'), 1000);
+      });
+    }
+  }
+}
 
+/** Gameboard event listener */
 
 gameBoard.addEventListener('click', handleCardClick);

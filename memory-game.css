@@ -86,3 +86,7 @@ body {
 .flipCard {
   transform: rotateY(0.5turn);
 }
+
+.match {
+  pointer-events: none;
+}
