@@ -3,14 +3,29 @@
 /** Memory game: find matching pairs of cards and flip both of them. */
 
 const FOUND_MATCH_WAIT_MSECS = 1000;
-const COLORS = [
-  "red", "blue", "green", "orange", "purple",
-  "red", "blue", "green", "orange", "purple",
+const IMAGES = [
+  { src: "images/astronaut.jpg", name: "astronaut" },
+  { src: "images/bonsai_tree.jpg", name: "bonsai" },
+  { src: "images/cat.jpg", name: "cat" },
+  { src: "images/dog.jpg", name: "dog" },
+  { src: "images/donuts.jpg", name: "donuts" },
+  { src: "images/ice_cream.jpg", name: "ice-cream" },
+  { src: "images/oranges.jpg", name: "oranges" },
+  { src: "images/pineapple_with_shades.jpg", name: "pineapple" },
+  { src: "images/astronaut.jpg", name: "astronaut" },
+  { src: "images/bonsai_tree.jpg", name: "bonsai" },
+  { src: "images/cat.jpg", name: "cat" },
+  { src: "images/dog.jpg", name: "dog" },
+  { src: "images/donuts.jpg", name: "donuts" },
+  { src: "images/ice_cream.jpg", name: "ice-cream" },
+  { src: "images/oranges.jpg", name: "oranges" },
+  { src: "images/pineapple_with_shades.jpg", name: "pineapple" }
 ];
+const backOfCardImage = "images/card_design.jpg";
 
-const colors = shuffle(COLORS);
+const images = shuffle(IMAGES);
 
-createCards(colors);
+createCards(images);
 
 
 /** Shuffle array items in-place and return shuffled array. */
@@ -38,11 +53,23 @@ function shuffle(items) {
  * - a click event listener for each card to handleCardClick
  */
 
-function createCards(colors) {
+function createCards(images) {
   const gameBoard = document.getElementById("game");
 
-  for (let color of colors) {
-    // missing code here ...
+  for (let image of images) {
+    const card = document.createElement('div');
+    const faceOfCard = document.createElement('img');
+    const backOfCard = document.createElement('img');
+
+    card.classList.add('card');
+    faceOfCard.classList.add('faceOfCard');
+    backOfCard.classList.add('backOfCard');
+
+    faceOfCard.setAttribute('src', image.src);
+    backOfCard.setAttribute('src', backOfCardImage);
+
+    card.append(faceOfCard, backOfCard);
+    gameBoard.append(card);
   }
 }
 

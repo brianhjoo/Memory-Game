@@ -1,9 +1,72 @@
-/* you can add to or change this. */
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
 
-#game div {
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game {
+  display: grid;
+  grid-template-columns: repeat(4, 15rem);
+  grid-template-rows: repeat(4, 20rem);
+  grid-gap: 1.5rem;
+}
+
+.card {
+  position: relative;
   border: 1px solid black;
-  width: 100px;
-  height: 100px;
-  margin: 20px;
-  display: inline-block;
+  width: 15rem;
+  height: 20rem;
+}
+
+.faceOfCard,
+.backOfCard {
+  position: absolute;
+}
+
+.faceOfCard {
+  width: 15rem;
+  height: 20rem;
+}
+
+.backOfCard {
+  width: 15rem;
+  height: 20rem;
 }
