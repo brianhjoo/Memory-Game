@@ -2,7 +2,7 @@
 
 /** Memory game: find matching pairs of cards and flip both of them. */
 
-const FOUND_MATCH_WAIT_MSECS = 1000;
+const NO_MATCH_WAIT_MSECS = 1000;
 const IMAGES = [
   { src: "images/astronaut.jpg", id: "astronaut" },
   { src: "images/flower.jpg", id: "flower" },
@@ -100,28 +100,29 @@ function handleCardClick(e) {
     } else {
       unFlipCard(card);
     }
-    checkMatch(e);
+    checkMatch();
   }
 }
 
 /** Check to see if flipped cards match */
 
-function checkMatch(e) {
+function checkMatch() {
   const faceUpCards = gameBoard.querySelectorAll('.faceUp');
   if (faceUpCards.length === 2) {
+    gameBoard.classList.add('unclickable');
     if (faceUpCards[0].firstChild.getAttribute('id') === faceUpCards[1].firstChild.getAttribute('id')) {
       faceUpCards.forEach(card => {
-        card.classList.add('match');
+        card.classList.add('unclickable');
         card.classList.remove('faceUp');
       });
     } else {
       faceUpCards.forEach(card => {
-        setTimeout(() => card.classList.remove('flipCard', 'faceUp'), 1000);
+        setTimeout(() => card.classList.remove('flipCard', 'faceUp'), NO_MATCH_WAIT_MSECS);
       });
     }
+    setTimeout(() => gameBoard.classList.remove('unclickable'), 1000);
   }
 }
 
-/** Gameboard event listener */
 
 gameBoard.addEventListener('click', handleCardClick);

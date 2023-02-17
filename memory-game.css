@@ -87,6 +87,6 @@ body {
   transform: rotateY(0.5turn);
 }
 
-.match {
+.unclickable {
   pointer-events: none;
 }
