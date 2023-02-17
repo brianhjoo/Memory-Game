@@ -76,17 +76,31 @@ function createCards(images) {
 /** Flip a card face-up. */
 
 function flipCard(card) {
-  // ... you need to write this ...
+  card.classList.toggle('flipCard');
+  card.classList.toggle('faceUp');
 }
 
 /** Flip a card face-down. */
 
 function unFlipCard(card) {
-  // ... you need to write this ...
+  card.classList.toggle('flipCard');
+  card.classList.toggle('faceUp');
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
 
-function handleCardClick(evt) {
-  // ... you need to write this ...
+function handleCardClick(e) {
+  const card = e.target;
+  if (!card.classList.contains('faceUp')) {
+    flipCard(card);
+  } else {
+    unFlipCard(card);
+  }
 }
+
+/** Event Listeners */
+
+const gameBoard = document.querySelector('#game');
+
+
+gameBoard.addEventListener('click', handleCardClick);
