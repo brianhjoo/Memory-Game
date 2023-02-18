@@ -35,10 +35,21 @@ img {
 }
 
 body {
-  height: 100vh;
+  height: 200vh;
   background-color: #d1e3ff;
+}
+
+#start-page {
+  height: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#wrapper {
+  height: 50%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -57,7 +68,7 @@ body {
   height: 20rem;
   box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
   transform-style: preserve-3d;
-  transition: all 1.2s ease;
+  transition: all 1.2s cubic-bezier(.44, .28, .6, 1.43);
 }
 
 .card,
