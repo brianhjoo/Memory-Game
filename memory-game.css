@@ -56,15 +56,27 @@ h1 {
   font-size: 10rem;
   font-weight: bold;
   text-transform: uppercase;
+  color: #0e0e0e;
   margin-bottom: 10rem;
+}
+
+h1 span {
+  color: #f7a900c7;
+  text-shadow: 0 0 0.15rem rgba(0, 0, 0, 0.3);
 }
 
 i {
   font-size: 5rem;
+  transition: 0.25s;
 }
 
 i:hover {
   cursor: pointer;
+  color: #f7a900c7;
+}
+
+i:active {
+  color: #f7a900;
 }
 
 #wrapper {
@@ -75,7 +87,7 @@ i:hover {
   align-items: center;
 }
 
-#counter-wrapper {
+#score-wrapper {
   height: 100%;
   width: 10%;
   display: flex;
@@ -83,10 +95,10 @@ i:hover {
   align-items: center;
 }
 
-#counter {
+#score {
   font-family: 'Montserrat', sans-serif;
   color: #f7a90080;
-  font-size: 12rem;
+  font-size: 13rem;
 }
 
 #game {
@@ -106,7 +118,7 @@ i:hover {
 }
 
 #reset-btn {
-  font-size: 6rem;
+  font-size: 7rem;
   color: #f7a90080;
 }
 

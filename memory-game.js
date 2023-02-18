@@ -26,6 +26,9 @@ const images = shuffle(IMAGES);
 const gameBoard = document.querySelector('#game');
 const playBtn = document.querySelector('#play-btn');
 const resetBtn = document.querySelector('#reset-btn');
+const score = document.querySelector('#score');
+
+let count = 0;
 
 createCards(images);
 
@@ -106,8 +109,18 @@ function handleCardClick(e) {
     } else {
       unFlipCard(card);
     }
+    updateScore(e);
     checkMatch();
   }
+}
+
+/** Update score with each click */
+
+function updateScore(e) {
+  if (e.target.classList.contains('card', 'faceUp')) {
+    count++;
+  }
+  score.innerText = count;
 }
 
 /** Check to see if flipped cards match */
@@ -153,6 +166,8 @@ function resetGameBoard() {
     card.firstChild.setAttribute('id', newImages[i].id);
     setTimeout(() => card.firstChild.setAttribute('src', newImages[i].src), 1000);
   });
+  count = 0;
+  score.innerText = count;
 }
 
 
