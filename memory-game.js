@@ -25,6 +25,7 @@ const backOfCardImage = "images/card_design.jpg";
 const images = shuffle(IMAGES);
 const gameBoard = document.querySelector('#game');
 const playBtn = document.querySelector('#play-btn');
+const resetBtn = document.querySelector('#reset-btn');
 
 createCards(images);
 
@@ -84,14 +85,14 @@ function createCards(images) {
 /** Flip a card face-up. */
 
 function flipCard(card) {
-  card.classList.toggle('flipCard');
+  card.classList.add('flipCard');
   card.classList.add('faceUp');
 }
 
 /** Flip a card face-down. */
 
 function unFlipCard(card) {
-  card.classList.toggle('flipCard');
+  card.classList.remove('flipCard');
   card.classList.remove('faceUp');
 }
 
@@ -149,13 +150,13 @@ function resetGameBoard() {
   cards.forEach((card, i) => {
     unFlipCard(card);
     card.classList.remove('unclickable', 'matchFound');
-    card.firstChild.setAttribute('src', newImages[i].src);
     card.firstChild.setAttribute('id', newImages[i].id);
+    setTimeout(() => card.firstChild.setAttribute('src', newImages[i].src), 1000);
   });
 }
 
 
 
 playBtn.addEventListener('click', startGame);
-
+resetBtn.addEventListener('click', resetGameBoard);
 gameBoard.addEventListener('click', handleCardClick);
