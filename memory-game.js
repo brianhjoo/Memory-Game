@@ -27,11 +27,13 @@ const gameBoard = document.querySelector('#game');
 const playBtn = document.querySelector('#play-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const score = document.querySelector('#score');
+const bestScore = document.querySelector('#best-score');
 
 let count = 0;
 
 createCards(images);
 
+bestScore.innerText = localStorage.getItem('topScore');
 
 /** Shuffle array items in-place and return shuffled array. */
 
@@ -151,13 +153,28 @@ function checkMatch() {
 function gameOver() {
   const matchFoundCards = gameBoard.querySelectorAll('.matchFound');
   if (matchFoundCards.length === IMAGES.length) {
+    const topScore = +(localStorage.getItem('topScore'));
+    console.log(topScore);
+    let scoreTickerCounter = 0;
+    if (count < topScore || !topScore) {
+      localStorage.setItem('topScore', count);
+    }
     setTimeout(() => {
       resetGameBoard();
     }, 2000);
+    const scoreTicker = setInterval(() => {
+      const topScore = +(localStorage.getItem('topScore'));
+      bestScore.innerText = scoreTickerCounter;
+      if (scoreTickerCounter === topScore) {
+        clearInterval(scoreTicker);
+      } else {
+        scoreTickerCounter++;
+      }
+    }, 35);
   }
 }
 
-/** Reset */
+/** Reset the game */
 
 function resetGameBoard() {
   const cards = gameBoard.querySelectorAll('.card');
@@ -174,6 +191,10 @@ function resetGameBoard() {
 
 
 
+/** Event listeners */
+
 playBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGameBoard);
 gameBoard.addEventListener('click', handleCardClick);
+
+

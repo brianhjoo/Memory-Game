@@ -91,6 +91,7 @@ i:active {
   height: 100%;
   width: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -99,6 +100,12 @@ i:active {
   font-family: 'Montserrat', sans-serif;
   color: #f7a90080;
   font-size: 13rem;
+}
+
+#best-score {
+  font-family: 'Montserrat', sans-serif;
+  color: #0000009c;
+  font-size: 4rem;
 }
 
 #game {
