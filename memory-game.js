@@ -22,10 +22,9 @@ const IMAGES = [
   { src: "images/pineapple_with_shades.jpg", id: "pineapple" }
 ];
 const backOfCardImage = "images/card_design.jpg";
-
 const images = shuffle(IMAGES);
-
 const gameBoard = document.querySelector('#game');
+const playBtn = document.querySelector('#play-btn');
 
 createCards(images);
 
@@ -47,6 +46,10 @@ function shuffle(items) {
 
   return items;
 }
+
+/** Click play button to begin game */
+
+
 
 /** Create card for every color in colors (each will appear twice)
  *
@@ -80,14 +83,14 @@ function createCards(images) {
 
 function flipCard(card) {
   card.classList.toggle('flipCard');
-  card.classList.toggle('faceUp');
+  card.classList.add('faceUp');
 }
 
 /** Flip a card face-down. */
 
 function unFlipCard(card) {
   card.classList.toggle('flipCard');
-  card.classList.toggle('faceUp');
+  card.classList.remove('faceUp');
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
@@ -112,7 +115,7 @@ function checkMatch() {
     gameBoard.classList.add('unclickable');
     if (faceUpCards[0].firstChild.getAttribute('id') === faceUpCards[1].firstChild.getAttribute('id')) {
       faceUpCards.forEach(card => {
-        card.classList.add('unclickable');
+        card.classList.add('unclickable', 'matchFound');
         card.classList.remove('faceUp');
       });
     } else {
@@ -122,6 +125,31 @@ function checkMatch() {
     }
     setTimeout(() => gameBoard.classList.remove('unclickable'), 1000);
   }
+  gameOver();
+}
+
+/** All matches are found  */
+
+function gameOver() {
+  const matchFoundCards = gameBoard.querySelectorAll('.matchFound');
+  if (matchFoundCards.length === IMAGES.length) {
+    setTimeout(() => {
+      resetGameBoard();
+    }, 2000);
+  }
+}
+
+/** Reset */
+
+function resetGameBoard() {
+  const cards = gameBoard.querySelectorAll('.card');
+  const newImages = shuffle(IMAGES);
+  cards.forEach((card, i) => {
+    unFlipCard(card);
+    card.classList.remove('unclickable', 'matchFound');
+    card.firstChild.setAttribute('src', newImages[i].src);
+    card.firstChild.setAttribute('id', newImages[i].id);
+  });
 }
 
 
