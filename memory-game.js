@@ -106,6 +106,7 @@ function handleCardClick(e) {
     const card = e.target;
     if (!card.classList.contains('faceUp')) {
       flipCard(card);
+      card.classList.add('unclickable');
     } else {
       unFlipCard(card);
     }
@@ -131,12 +132,13 @@ function checkMatch() {
     gameBoard.classList.add('unclickable');
     if (faceUpCards[0].firstChild.getAttribute('id') === faceUpCards[1].firstChild.getAttribute('id')) {
       faceUpCards.forEach(card => {
-        card.classList.add('unclickable', 'matchFound');
+        card.classList.add('matchFound');
         card.classList.remove('faceUp');
       });
     } else {
       faceUpCards.forEach(card => {
         setTimeout(() => card.classList.remove('flipCard', 'faceUp'), NO_MATCH_WAIT_MSECS);
+        setTimeout(() => card.classList.remove('unclickable'), 2000);
       });
     }
     setTimeout(() => gameBoard.classList.remove('unclickable'), 1000);
