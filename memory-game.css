@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 html {
   box-sizing: border-box;
   font-size: 10px;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -36,7 +39,8 @@ img {
 
 body {
   height: 200vh;
-  background-color: #d1e3ff;
+  background: #ecf7ff;
+  background: linear-gradient(180deg, #ecf7ff 0%, #cbeaff 100%);
 }
 
 #start-page {
@@ -45,6 +49,22 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10rem;
+}
+
+i {
+  font-size: 5rem;
+}
+
+i:hover {
+  cursor: pointer;
 }
 
 #wrapper {
@@ -66,9 +86,13 @@ body {
   position: relative;
   width: 15rem;
   height: 20rem;
-  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.35);
   transform-style: preserve-3d;
   transition: all 1.2s cubic-bezier(.44, .28, .6, 1.43);
+}
+
+.card:hover {
+  cursor: pointer;
 }
 
 .card,

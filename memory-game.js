@@ -49,7 +49,9 @@ function shuffle(items) {
 
 /** Click play button to begin game */
 
-
+function startGame() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
 
 /** Create card for every color in colors (each will appear twice)
  *
@@ -152,5 +154,8 @@ function resetGameBoard() {
   });
 }
 
+
+
+playBtn.addEventListener('click', startGame);
 
 gameBoard.addEventListener('click', handleCardClick);
